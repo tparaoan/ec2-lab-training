@@ -24,12 +24,7 @@ data "aws_subnet" "public" {
 
 data "aws_subnet" "private" {
   filter {
-       name = "tag:Name"
-       values = [var.private_subnet_name]
+    name = "tag:Name"
+    values = [var.private_subnet_name]
   }
-}
-    
-    tags = {
-        Name = "talent-academy-private-a"
-    }
 }

@@ -28,3 +28,17 @@ resource "aws_security_group" "my_public_app_sg" {
   protocol = "-1" # TCP + UDP
   }
 }
+resource "aws_security_group" "my_private_app_sg" {
+  name        = "my_private_app_sg"
+  description = "Allow access to this server"
+  vpc_id      = data.aws_vpc.main_vpc.id
+
+  # INBOUND CONNECTIONS
+  ingress {
+  description = "Allow SSH only to the public private instance"
+  from_port   = 22
+  to_port     = 22
+  protocol    = "tcp"
+  cidr_blocks = ["192.168.1.101/32"]
+  }
+}
