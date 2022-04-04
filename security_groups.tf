@@ -13,32 +13,43 @@ resource "aws_security_group" "my_public_app_sg" {
   }
 
   ingress {
-    description = "Allow access to the world"
+    description = "Allow HTTP into the EC2"
     from_port   = 80
     to_port     = 80
-    protocol    = "tcp" 
+    protocol    = "tcp"
     cidr_blocks = ["0.0.0.0/0"]
   }
 
-  # OUTBOUT CONNECTIONS
+  # OUTBOUND CONNECTIONS
   egress {
-  description = "Allow access to the world"
-  from_port = 0
-  to_port = 0
-  protocol = "-1" # TCP + UDP
+    description = "Allow access to the world"
+    from_port   = 0
+    to_port     = 0
+    protocol    = "-1" #TCP + UDP
   }
 }
-resource "aws_security_group" "my_private_app_sg" {
-  name        = "my_private_app_sg"
+
+
+resource "aws_security_group" "private_sg" {
+  name        = "Private-Servers-SG"
   description = "Allow access to this server"
   vpc_id      = data.aws_vpc.main_vpc.id
 
-  # INBOUND CONNECTIONS
+  #INBOUND CONNECTIONS
   ingress {
-  description = "Allow SSH only to the public private instance"
-  from_port   = 22
-  to_port     = 22
-  protocol    = "tcp"
-  cidr_blocks = ["192.168.1.101/32"]
+    description = "Allow SSH into the EC2"
+    from_port   = 22
+    to_port     = 22
+    protocol    = "tcp"
+    cidr_blocks = ["192.168.1.0/24"] #ALL INSTANCES IN PUBLIC SUBNET IS ALLOWED TO CONNECT
+  }
+
+  #OUTBOUND CONNECTIONS
+  egress {
+    description = "Allow access to the world"
+    from_port   = 0
+    to_port     = 0
+    protocol    = "-1" # TCP + UDP
+    cidr_blocks = ["0.0.0.0/0"]
   }
 }
