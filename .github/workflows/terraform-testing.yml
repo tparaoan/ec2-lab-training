@@ -25,8 +25,8 @@ jobs:
       - name: Terraform Validate
         run: terraform validate
 
-      - name: Init our project
+      - name: Init project
         run: terraform init
 
-      - name: run a plan
+      - name: run TF plan
         run: terraform plan
