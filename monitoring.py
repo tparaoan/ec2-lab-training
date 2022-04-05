@@ -4,7 +4,7 @@ html_page = "<html><body><h1>List of instances from the Private Subnet</h1>"
 
 # GET SUBNET INFORMATION
 def getPrivateSubnetId():
-    ec2_client = boto3.client('ec2')
+    ec2_client = boto3.client('ec2', region_name="us-east-1")
     subnets_info = ec2_client.describe_subnets()
 
     for subnet in subnets_info['Subnets']:
@@ -14,7 +14,7 @@ def getPrivateSubnetId():
 
 private_subnet = getPrivateSubnetId()
 
-ec2 = boto3.resource('ec2')
+ec2 = boto3.resource('ec2', region_name="us-east-1")
 
 for instance in ec2.instances.all():
 
