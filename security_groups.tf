@@ -26,9 +26,9 @@ resource "aws_security_group" "my_public_app_sg" {
     from_port   = 0
     to_port     = 0
     protocol    = "-1" #TCP + UDP
+    cidr_blocks = ["0.0.0.0/0"]
   }
 }
-
 
 resource "aws_security_group" "private_sg" {
   name        = "Private-Servers-SG"

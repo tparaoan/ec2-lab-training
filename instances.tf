@@ -14,7 +14,8 @@ resource "aws_instance" "my_public_server" {
 }
 
 resource "aws_instance" "private_servers" {
-  count                  = var.number_of_private_instances
+  count = var.number_of_private_instances
+  
   ami                    = data.aws_ami.aws_basic_linux.id
   instance_type          = var.ec2_type
   subnet_id              = data.aws_subnet.private.id
