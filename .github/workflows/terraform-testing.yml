@@ -30,3 +30,6 @@ jobs:
 
       - name: run TF plan
         run: terraform plan
+
+      - name: Apply infra
+        run: terraform apply -auto-approve
